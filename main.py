@@ -23,26 +23,26 @@ def download_Chapters(r):
                 wget.download(full_link)            
 
 
-
-while episode_finder:
-    # !flag kabul etmedi
-    if episode >= 1000: 
-        r = requests.get("https://mangadenizi.com/manga/one-piece/{episode}".format(episode = episode))
-    else:       
-        r = requests.get("https://mangadenizi.com/manga/one-piece/{episode_zero}{episode}".format(episode_zero=episode_zero,episode = episode))
-    if r.status_code == 200:
-        print("bölüm bulundu ", episode)
-        first_episode_finded = True
-        os.mkdir(str(episode))
-        os.chdir(str(episode)) 
-        download_Chapters(r)
-        os.chdir("../")
-        episode = episode +1
-    elif r.status_code == 500:
-        if first_episode_finded == True:
-            print("Başka bölüm bulunamadı ", episode)
-            episode_finder = False
-        else:
-            print("bölüm bulunamadı ", episode)
+def main():
+    while episode_finder:
+        # !flag kabul etmedi
+        if episode >= 1000: 
+            r = requests.get("https://mangadenizi.com/manga/one-piece/{episode}".format(episode = episode))
+        else:       
+            r = requests.get("https://mangadenizi.com/manga/one-piece/{episode_zero}{episode}".format(episode_zero=episode_zero,episode = episode))
+        if r.status_code == 200:
+            print("bölüm bulundu ", episode)
+            first_episode_finded = True
+            os.mkdir(str(episode))
+            os.chdir(str(episode)) 
+            download_Chapters(r)
+            os.chdir("../")
             episode = episode +1
-    else: episode = episode +1
+        elif r.status_code == 500:
+            if first_episode_finded == True:
+                print("Başka bölüm bulunamadı ", episode)
+                episode_finder = False
+            else:
+                print("bölüm bulunamadı ", episode)
+                episode = episode +1
+        else: episode = episode +1
