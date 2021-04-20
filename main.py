@@ -4,10 +4,6 @@ from bs4 import BeautifulSoup
 import time
 import os 
 
-episode_finder = True
-first_episode_finded = False
-episode = 700
-episode_zero = 0
 
 os.chdir("One Piece")
 
@@ -23,7 +19,14 @@ def download_Chapters(r):
                 wget.download(full_link)            
 
 
-def main():
+
+def episode_finder_func():
+     
+    episode_finder = True
+    first_episode_finded = False
+    episode = 700
+    episode_zero = 0
+
     while episode_finder:
         # !flag kabul etmedi
         if episode >= 1000: 
@@ -46,3 +49,12 @@ def main():
                 print("bölüm bulunamadı ", episode)
                 episode = episode +1
         else: episode = episode +1
+
+
+def main():
+    episode_finder_func()
+
+
+main()
+
+
